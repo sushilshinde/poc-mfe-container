@@ -1,16 +1,15 @@
 import React from 'react';
-// import logo from './logo.svg';
-import './App.css';
+import './index.css';
 
 const Header = React.lazy(() => import('HeaderAndFooter/Header'))
 const TopRepos = React.lazy(() => import('TopRepos/TopRepos'))
 const Activities = React.lazy(() => import('Activities/CommitsCard'))
 
-function App() {
+function ContainerPage() {
   return (
     <>
       <Header />
-      <div class="d-flex justify-content-evenly m-4 my-container">
+      <div className="d-flex justify-content-evenly m-4 my-container">
         <TopRepos />
         <Activities />
       </div>
@@ -18,4 +17,4 @@ function App() {
   );
 }
 
-export default App;
+export default ContainerPage;

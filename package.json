@@ -23,11 +23,9 @@
     "webpack-dev-server": "^4.11.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "dev": "webpack serve --mode development",
-    "build": "webpack"
+    "build": "webpack  --mode production",
+    "build:start": "cd build && set PORT=3000 && npx serve"
   },
   "eslintConfig": {
     "extends": [
