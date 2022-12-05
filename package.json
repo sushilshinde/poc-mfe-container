@@ -23,9 +23,9 @@
     "webpack-dev-server": "^4.11.1"
   },
   "scripts": {
-    "dev": "webpack serve --mode development",
-    "build": "webpack  --mode production",
-    "build:start": "cd build && set PORT=3000 && npx serve"
+    "dev": "webpack serve --mode development --env environment=dev",
+    "build": "webpack  --mode production --env environment=prod",
+    "prod": "cd build && set PORT=3000 && npx serve"
   },
   "eslintConfig": {
     "extends": [
