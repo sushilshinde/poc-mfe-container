@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './index.css';
 
 const Header = React.lazy(() => import('HeaderAndFooter/Header'))
@@ -6,15 +6,6 @@ const TopRepos = React.lazy(() => import('TopRepos/TopRepos'))
 const Activities = React.lazy(() => import('Activities/CommitsCard'))
 
 function ContainerPage() {
-
-  useEffect(() => {
-    fetch('/repositories')
-    .then(res => res.json())
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => console.log(err))
-  }, [])
   return (
     <>
       <Header />

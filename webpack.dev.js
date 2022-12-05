@@ -66,12 +66,6 @@ module.exports = {
         static: {
             directory: path.join(__dirname, "build"),
         },
-        port: 3000,
-        proxy: {
-            '/': {
-                target: 'http://localhost:9000',
-                secure: false
-            }
-        }
+        port: 3000
     }
 };
