@@ -1,7 +1,7 @@
 import React from "react";
 import ErrorContainer from "../../containers/ErrorContainer";
 import "./index.css";
-
+import PublicEvents from "./PublicEvents";
 const Header = React.lazy(() => import("HeaderAndFooter/Header"));
 const TopRepos = React.lazy(() => import("TopRepos/TopRepos"));
 const Activities = React.lazy(() => import("Activities/StarredRepos"));
@@ -24,6 +24,9 @@ function ContainerPage() {
                 </ErrorContainer>
                 <ErrorContainer>
                     <Activities />
+                </ErrorContainer>
+                <ErrorContainer>
+                    <PublicEvents />
                 </ErrorContainer>
             </div>
         </>

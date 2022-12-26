@@ -1,6 +1,8 @@
 .card {
   background-color: #0dcaf021 !important;
   box-shadow: 0 12px 23px lightgray;
+
+  flex-basis: 20%;
 }
 
 .list-group-item {
