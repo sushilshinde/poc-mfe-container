@@ -35,6 +35,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "index.html"),
+            favicon: "./src/assets/images/logo.gif"
         }),
         new MiniCssExtractPlugin(),
         // MODULE FEDERATION
@@ -42,9 +43,10 @@ module.exports = {
             name: "Host",
             filename: "moduleEntry.js",
             remotes: {
-                HeaderAndFooter: `HeaderAndFooter@http://localhost:3001/moduleEntry.js`,
-                TopRepos: `TopRepos@http://localhost:3002/moduleEntry.js`,
-                Activities: `Activities@http://localhost:3003/moduleEntry.js`,
+                HeaderAndFooter: `HeaderAndFooter@https://poc-mfe-header-footer.onrender.com/moduleEntry.js`,
+                TopRepos: `TopRepos@https://poc-mfe-top-repos.onrender.com/moduleEntry.js`,
+                Activities: `Activities@https://poc-mfe-activities.onrender.com/moduleEntry.js`,
+                PublicEvents: `PublicEvents@http://localhost:4000/remoteEntry.js`,
             },
             shared: {
                 ...dependencies,
@@ -66,6 +68,6 @@ module.exports = {
         static: {
             directory: path.join(__dirname, "build"),
         },
-        port: 3000
-    }
+        port: 3000,
+    },
 };
