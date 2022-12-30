@@ -46,7 +46,7 @@ module.exports = {
           HeaderAndFooter: `HeaderAndFooter@https://poc-mfe-header-footer.onrender.com/moduleEntry.js`,
           TopRepos: `TopRepos@https://poc-mfe-top-repos.onrender.com/moduleEntry.js`,
           Activities: `Activities@https://poc-mfe-activities.onrender.com/moduleEntry.js`,
-          PublicEvents: `PublicEvents@http://poc-mfe-events.onrender.com/remoteEntry.js`
+          PublicEvents: `PublicEvents@https://poc-mfe-events.onrender.com/remoteEntry.js`
         },
         shared: {
             ...dependencies,
