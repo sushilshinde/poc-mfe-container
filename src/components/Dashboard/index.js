@@ -28,7 +28,7 @@ const Dashboard = ({ userDetails }) => {
                 localStorage.removeItem('user-token')
                 toast.warn('Session Expired, Login again !!!', 3000)
                 setTimeout(() => {
-                    window.location.replace('http://localhost:3000/logout')
+                    window.location.replace(process.env.LOGOUT_URL)
                 }, 3000)
                 
             }
