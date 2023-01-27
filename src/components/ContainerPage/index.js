@@ -1,10 +1,12 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ErrorContainer from "../../containers/ErrorContainer";
+import Dashboard from "../Dashboard";
+import PrivateRoute from "../PrivateRoute";
+import PublicRoute from "../PublicRoute";
 import "./index.css";
-import PublicEvents from "./PublicEvents";
-const Header = React.lazy(() => import("HeaderAndFooter/Header"));
-const TopRepos = React.lazy(() => import("TopRepos/TopRepos"));
-const Activities = React.lazy(() => import("Activities/StarredRepos"));
+const Login = React.lazy(() => import("Login/LoginComponent"));
+const Logout = React.lazy(() => import("Login/LogoutComponent"));
 
 /**
  * Container Page
@@ -14,22 +16,38 @@ const Activities = React.lazy(() => import("Activities/StarredRepos"));
  */
 function ContainerPage() {
     return (
-        <>
-            <ErrorContainer>
-                <Header />
-            </ErrorContainer>
-            <div className="d-flex justify-content-evenly m-4 my-container">
-                <ErrorContainer>
-                    <TopRepos />
-                </ErrorContainer>
-                <ErrorContainer>
-                    <Activities />
-                </ErrorContainer>
-                <ErrorContainer>
-                    <PublicEvents />
-                </ErrorContainer>
-            </div>
-        </>
+        <Router>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        <PublicRoute>
+                            <ErrorContainer>
+                                <Login />
+                            </ErrorContainer>
+                        </PublicRoute>
+                    }
+                />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <PrivateRoute>
+                            <Dashboard />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/logout"
+                    element={
+                        // <PublicRoute>
+                            <ErrorContainer>
+                                <Logout />
+                            </ErrorContainer>
+                        // </PublicRoute>
+                    }
+                />
+            </Routes>
+        </Router>
     );
 }
 

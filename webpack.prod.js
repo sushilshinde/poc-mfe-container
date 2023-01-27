@@ -1,9 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const webpack = require('webpack')
 
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin")
+const dotenv = require('dotenv');
 const { dependencies } = require('./package.json')
+
+const env = dotenv.config().parsed;// dotenv.config().parsed
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
@@ -43,10 +47,11 @@ module.exports = {
         name: "Host",
         filename: "moduleEntry.js",
         remotes: {
-          HeaderAndFooter: `HeaderAndFooter@https://poc-mfe-header-footer.onrender.com/moduleEntry.js`,
-          TopRepos: `TopRepos@https://poc-mfe-top-repos.onrender.com/moduleEntry.js`,
-          Activities: `Activities@https://poc-mfe-activities.onrender.com/moduleEntry.js`,
-          PublicEvents: `PublicEvents@https://poc-mfe-events.onrender.com/remoteEntry.js`
+          Login: env.LOGIN_PAGE,
+          HeaderAndFooter: env.HEADER_FOOTER_PAGE,
+          TopRepos: env.TOP_REPOS_PAGE,
+          Activities: env.ACTIVITIES_PAGE,
+          PublicEvents: env.PUBLIC_EVENTS_PAGE
         },
         shared: {
             ...dependencies,
@@ -59,7 +64,11 @@ module.exports = {
                 requiredVersion: dependencies['react-dom']
             }
         }
-    })
+    }),
+    new webpack.DefinePlugin(Object.keys(env).reduce((prev, next) => {
+      prev[`process.env.${next}`] = JSON.stringify(env[next]);
+      return prev;
+  }, {}))
   ],
   resolve: {
     extensions: ["*", ".js", ".jsx"]
@@ -68,6 +77,7 @@ module.exports = {
     static: {
         directory: path.join(__dirname, "build")
     },
-    port: 3000
+    port: 3000,
+    historyApiFallback: true
   }
 }

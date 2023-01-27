@@ -1,16 +1,20 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require('webpack')
 
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const dotenv = require('dotenv');
 const { dependencies } = require("./package.json");
+
+const env = dotenv.config().parsed || { API_URL: 'http://localhost:4444', LOGOUT_URL : 'http://localhost:3000/logout' }// dotenv.config().parsed
 
 module.exports = {
     entry: path.join(__dirname, "src", "index.js"),
     output: {
         filename: "main.js",
-        path: path.resolve(__dirname, "build"),
-    },
+        path: path.resolve(__dirname, "build")
+        },
     module: {
         rules: [
             {
@@ -43,9 +47,10 @@ module.exports = {
             name: "Host",
             filename: "moduleEntry.js",
             remotes: {
-                HeaderAndFooter: `HeaderAndFooter@https://poc-mfe-header-footer.onrender.com/moduleEntry.js`,
-                TopRepos: `TopRepos@https://poc-mfe-top-repos.onrender.com/moduleEntry.js`,
-                Activities: `Activities@https://poc-mfe-activities.onrender.com/moduleEntry.js`,
+                Login: `Login@http://localhost:3005/remoteEntry.js`,
+                HeaderAndFooter: `HeaderAndFooter@http://localhost:3001/moduleEntry.js`,
+                TopRepos: `TopRepos@http://localhost:3002/moduleEntry.js`,
+                Activities: `Activities@http://localhost:3003/moduleEntry.js`,
                 PublicEvents: `PublicEvents@http://localhost:4000/remoteEntry.js`,
             },
             shared: {
@@ -60,6 +65,10 @@ module.exports = {
                 },
             },
         }),
+        new webpack.DefinePlugin(Object.keys(env).reduce((prev, next) => {
+            prev[`process.env.${next}`] = JSON.stringify(env[next]);
+            return prev;
+        }, {}))
     ],
     resolve: {
         extensions: ["*", ".js", ".jsx"],
@@ -69,5 +78,6 @@ module.exports = {
             directory: path.join(__dirname, "build"),
         },
         port: 3000,
+        historyApiFallback: true,
     },
 };
