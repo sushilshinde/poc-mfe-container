@@ -19,11 +19,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        enforce: 'pre',
-        use: ['source-map-loader'],
-      },
-      {
         test: /\.?js$/,
         exclude: /node_modules/,
         use: {
@@ -83,8 +78,6 @@ module.exports = {
     static: {
         directory: path.join(__dirname, "build")
     },
-    port: 3000,
-    historyApiFallback: true,
-    compress: true,
+    port: 3000
   }
 }
