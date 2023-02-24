@@ -20,7 +20,7 @@ class PrivateRoute extends React.Component {
         .catch(err => {
             // For fail, update state like
             this.setState(() => ({ isLoading: false, isLoggedIn: false }));
-            localStorage.removeItem('user-info');
+            localStorage.removeItem('user-token');
         })
     }
 
