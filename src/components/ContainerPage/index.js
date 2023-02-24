@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import ErrorContainer from "../../containers/ErrorContainer";
 import Dashboard from "../Dashboard";
 import PrivateRoute from "../PrivateRoute";
@@ -35,17 +35,19 @@ function ContainerPage() {
                             <Dashboard />
                         </PrivateRoute>
                     }
+
                 />
                 <Route
                     path="/logout"
                     element={
-                        // <PublicRoute>
+                        <PublicRoute>
                             <ErrorContainer>
                                 <Logout />
                             </ErrorContainer>
-                        // </PublicRoute>
+                        </PublicRoute>
                     }
                 />
+                <Route path="*" element={ <Navigate to={'/'} /> } />
             </Routes>
         </Router>
     );

@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { verifyToken } from "../services/githubService";
+import Loader from "./Loader.js";
 
 class PrivateRoute extends React.Component {
     constructor(props, context) {
@@ -17,13 +18,14 @@ class PrivateRoute extends React.Component {
             this.setState(() => ({ isLoading: false, isLoggedIn: true, userDetails: data }));
         })
         .catch(err => {
-             // For fail, update state like
-                this.setState(() => ({ isLoading: false, isLoggedIn: false }));
+            // For fail, update state like
+            this.setState(() => ({ isLoading: false, isLoggedIn: false }));
+            localStorage.removeItem('user-info');
         })
     }
 
     render() {
-        return this.state.isLoading ? null : this.state.isLoggedIn ? (
+        return this.state.isLoading ? <Loader /> : this.state.isLoggedIn ? (
             React.cloneElement(this.props.children, { userDetails: this.state.userDetails })
         ) : (
             <Navigate

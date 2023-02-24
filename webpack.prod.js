@@ -14,9 +14,15 @@ module.exports = {
   output: {
     filename: "main.js",
     path:path.resolve(__dirname, "build"),
+    publicPath: '/'
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      },
       {
         test: /\.?js$/,
         exclude: /node_modules/,
@@ -78,6 +84,7 @@ module.exports = {
         directory: path.join(__dirname, "build")
     },
     port: 3000,
-    historyApiFallback: true
+    historyApiFallback: true,
+    compress: true,
   }
 }
