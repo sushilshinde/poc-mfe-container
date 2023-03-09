@@ -1,3 +1,7 @@
 .btn.col-1 {
     width: initial !important;
 }
+
+.my-container > * {
+    flex-basis: 30%;
+}

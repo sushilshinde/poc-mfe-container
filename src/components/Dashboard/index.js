@@ -3,15 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ErrorContainer from "../../containers/ErrorContainer";
 import Notification from "../Notification";
-import PublicEvents from "../PublicEvents";
 import "./index.css";
+const PublicEvents = React.lazy(() => import("../PublicEvents"));
 const Header = React.lazy(() => import("HeaderAndFooter/Header"));
 const TopRepos = React.lazy(() => import("TopRepos/TopRepos"));
 const Activities = React.lazy(() => import("Activities/StarredRepos"));
 
 const Dashboard = ({ userDetails }) => {
-    const navigate = useNavigate()
-
     useEffect(() => {
         const username = userDetails.details.username;
         const event = new CustomEvent("getUserDetails", {
