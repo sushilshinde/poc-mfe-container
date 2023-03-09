@@ -4,6 +4,9 @@
 Ensure all the MFE apps and Server Application is running by following the steps mentioned in the 
 [Documentation for Local Deployment](https://wiki.msystechnologies.com/doc/mfe-documentation-Ng5uksSbT2/edit#h-local-deployment)
 
+## Environment Configuration:
+Set env variables as per below syntax before running the app provided in .env.example file
+
 ## Available Scripts
 
 In the project directory, you can run:
